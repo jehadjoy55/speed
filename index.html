@@ -61,19 +61,19 @@
         function testSpeed() {
             const startTime = new Date().getTime();
             const image = new Image();
-            const imageUrl = "https://via.placeholder.com/1000x1000"; // Use a sample image URL
+            const imageUrl = "https://raw.githubusercontent.com/jehadjoy55/speed/main/Samsung-Galaxy-S22-Ultra-PhantomBlack.jpg"; // Use a raw image URL
             const resultDiv = document.getElementById("result");
 
             image.onload = () => {
                 const endTime = new Date().getTime();
                 const duration = (endTime - startTime) / 1000; // time in seconds
-                const fileSize = 1000 * 1000 * 8; // 1 MB in bits
+                const fileSize = 1000 * 1000 * 8; // 1 MB in bits (adjust size if the image is different)
                 const speed = (fileSize / duration / (1024 * 1024)).toFixed(2); // Mbps
                 resultDiv.innerHTML = `Download Speed: ${speed} Mbps`;
             };
 
             image.onerror = () => {
-                resultDiv.innerHTML = "Error testing speed. Please try again.";
+                resultDiv.innerHTML = "Error testing speed. Ensure you have an active internet connection and try again.";
             };
 
             image.src = imageUrl + "?" + new Date().getTime(); // Prevent caching
