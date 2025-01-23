@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Speed Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #fff;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: #00c6ff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #007acc;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Internet Speed Test</h1>
+        <button onclick="testSpeed()">Start Test</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function testSpeed() {
+            const startTime = new Date().getTime();
+            const image = new Image();
+            const imageUrl = "https://via.placeholder.com/1000x1000"; // Use a sample image URL
+            const resultDiv = document.getElementById("result");
+
+            image.onload = () => {
+                const endTime = new Date().getTime();
+                const duration = (endTime - startTime) / 1000; // time in seconds
+                const fileSize = 1000 * 1000 * 8; // 1 MB in bits
+                const speed = (fileSize / duration / (1024 * 1024)).toFixed(2); // Mbps
+                resultDiv.innerHTML = `Download Speed: ${speed} Mbps`;
+            };
+
+            image.onerror = () => {
+                resultDiv.innerHTML = "Error testing speed. Please try again.";
+            };
+
+            image.src = imageUrl + "?" + new Date().getTime(); // Prevent caching
+        }
+    </script>
+</body>
+</html>
